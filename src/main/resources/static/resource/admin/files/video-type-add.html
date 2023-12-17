@@ -1,0 +1,159 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>在线视频系统</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
+    <!-- plugin css file  -->
+    <link rel="stylesheet" href="assets/plugin/datatables/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="assets/plugin/datatables/dataTables.bootstrap5.min.css">
+    <!-- project css file  -->
+    <link rel="stylesheet" href="assets/css/ihealth.style.min.css">
+    <link href="css/avatar.css" rel="stylesheet">
+</head>
+<body>
+
+<div id="ihealth-layout" class="theme-tradewind">
+    
+   
+
+    <!-- main body area -->
+    <div class="main px-lg-4 px-md-4">
+
+        <!-- Body: Header -->
+        <div class="header">
+            <nav class="navbar py-4">
+                <div class="container-xxl">
+    
+                    <!-- header rightbar icon -->
+                    <div class="h-right d-flex align-items-center mr-5 mr-lg-0 order-1">
+                      
+                        
+                        <div class="dropdown user-profile ml-2 ml-sm-3 d-flex align-items-center zindex-popover" >
+                            <div class="u-info me-2">
+                                <p class="mb-0 text-end line-height-sm "><span class="font-weight-bold" id="userName"></span></p>
+                               
+                            </div>
+                            <a class="nav-link dropdown-toggle pulse p-0" href="#" role="button" data-bs-toggle="dropdown" data-bs-display="static">
+                                <img id="avatar" class="avatar lg rounded-circle img-thumbnail" src="" alt="profile">
+                            </a>
+                            <div class="dropdown-menu rounded-lg shadow border-0 dropdown-animation dropdown-menu-end p-0 m-0">
+                                <div class="card border-0 w280">
+                                    
+                                    <div class="list-group m-2 ">
+                                        
+                                        <a href="#" class="list-group-item list-group-item-action border-0 " onclick="loginOut()"><i class="icofont-logout fs-6 me-3"></i>登出</a>
+                                      
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+    
+                    <!-- menu toggler -->
+                    <button class="navbar-toggler p-0 border-0 menu-toggle order-3" type="button" data-bs-toggle="collapse" data-bs-target="#mainHeader">
+                        <span class="fa fa-bars"></span>
+                    </button>
+                    <div></div>
+                  
+    
+                </div>
+            </nav>
+        </div>  
+
+        <!-- Body: Body -->
+        <div class="body d-flex py-3">
+            
+            <div class="card mb-3">
+                <div class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
+                    <h6 class="mb-0 fw-bold ">添加分类</h6>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="row g-3 align-items-center">
+                            
+
+                            <div class="col-md-6">
+                                <label for="user" class="form-label">分类昵称</label>
+                                <input type="text" class="form-control" id="isim" required style="border: 1px solid var(--primary-color);">
+                            </div>
+
+                          
+                            
+                            
+                            
+                        </div>
+                        
+                        <button type="button" class="btn btn-primary mt-4" onclick="sendBtn()">提交</button>
+                    </form>
+                </div>  
+            </div>
+
+        </div>      
+      
+        
+
+       
+    </div>
+  
+</div>
+
+<!-- Jquery Core Js -->
+<script src="assets/bundles/libscripts.bundle.js"></script>
+
+<!-- Plugin Js -->
+<script src="assets/bundles/apexcharts.bundle.js"></script>
+<script src="assets/plugin/jqueryuicalandar/jquery-ui.min.js"></script>
+<script src="assets/plugin/owlcarousel/owl.carousel.js"></script>
+<script src="assets/bundles/dataTables.bundle.js"></script>      
+
+<!-- Jquery Page Js -->
+<script src="../js/template.js"></script>
+<script src="../js/page/index.js"></script>
+
+<script src="assets/common/modules/jquery/jquery-3.4.1.min.js"></script>
+<script src="assets/common/modules/jquery/jquery.particleground.min.js"></script>
+<script src="assets/common/modules/jquery/jquery.cookie.js"></script>
+<script src="assets/common/common.js"></script>
+ <script>
+      
+    // 个人信息
+    elyasAjax('user/detailByToken').then(res =>{
+        $('#avatar').attr('src', res.data.avatar && res.data.avatar.split(',')[res.data.avatar.split(',').length-1])
+        $('#userName').html(res.data.userName)
+        $('#userEmail').html(res.data.email)
+    })
+
+    // 退出登录
+    function loginOut(){
+        $.removeCookie('token',{domain:'127.0.0.1',path:'/'})
+        commonUtil.message('正在退出。。。')
+        setTimeout(() => {
+            window.parent.location.href = '../../../login.html';
+        }, 500);
+    }
+
+       
+
+
+            // 提交
+            function sendBtn(){
+            
+                elyasAjax('video/type/add',JSON.stringify({
+                    name:$('#isim').val(),
+                })).then(res =>{
+                    console.log(res,'提交信息')
+                    window.location.href = './video-type.html'
+                })
+            }
+
+   
+
+ </script>
+</body>
+</html> 

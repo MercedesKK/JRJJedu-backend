@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>首页</title>
+    <link
+      rel="stylesheet"
+      href="./utils/fontawesome-free-5.15.4-web/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./css/custom.css" />
+    <link rel="stylesheet" href="./css/addheader.css" />
+    <link
+    href="https://unpkg.com/@wangeditor/editor@latest/dist/css/style.css"
+    rel="stylesheet"
+  />
+
+
+  <link
+  rel="stylesheet"
+  href="../admin/files/assets/plugin/datatables/responsive.dataTables.min.css"
+/>
+
+<!-- project css file  -->
+<link rel="stylesheet" href="../admin/files/assets/css/ihealth.style.min.css" />
+<link href="../admin/files/css/avatar.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="header">
+      <nav id="navBar">
+        <div class="menu" id="menu">
+          <div class="left">
+            <ul class="left_ul">
+              <li class="left_li">
+                <a href="./index.html">
+                  <i class="fas fa-house-damage"></i>
+                  首页
+                </a>
+              </li>
+              <li class="left_li"><a href="javascript:;">番剧</a></li>
+              <li class="left_li"><a href="javascript:;">直播</a></li>
+              <li class="left_li"><a href="javascript:;">游戏中心</a></li>
+              <li class="left_li"><a href="javascript:;">会员购</a></li>
+              <li class="left_li"><a href="javascript:;">漫画</a></li>
+              <li class="left_li"><a href="javascript:;">赛事</a></li>
+              <li class="left_li">
+                <a href="javascript:;">
+                  <i class="fas fa-chess-rook"></i>
+                  下载客户端
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="search">
+            <input type="text" class="search_input" placeholder="魔兽世界"  />
+            <i class="fab fa-sistrix" onclick="searchHandleClick()"></i>
+          </div>
+
+          <div class="right">
+            <ul class="right_ul">
+              <li class="right_li avatar_box">
+               <a href="./user.html" style="width: 32px;height:32px" id="userAvatar">
+                <img src="./images/avatar.png" class="avatar" />
+               </a>
+              </li>
+              <li class="right_li">
+                <i class="fab fa-sketch"></i>
+                <p>大会员</p>
+              </li>
+              <a href="./chatlist.html">
+                <li class="right_li">
+                  <i class="fab fa-pushed"></i>
+                  <p>消息</p>
+                </li>
+              </a>
+              <li class="right_li">
+                <i class="fab fa-react"></i>
+                <p>动态</p>
+              </li>
+              <li class="right_li">
+                <i class="fas fa-chess-rook"></i>
+                <p>收藏</p>
+              </li>
+              <li class="right_li">
+                <i class="fab fa-cloudversify"></i>
+                <p>历史</p>
+              </li>
+              <li class="right_li">
+                <i class="far fa-window-maximize"></i>
+                <p>创作中心</p>
+              </li>
+              <a href="./addvideo.html">
+                <button>
+                  <i class="fas fa-pen-square"></i>
+                  投稿
+                </button>
+              </a>
+            </ul>
+          </div>
+        </div>
+        
+      </nav>
+    </header>
+
+    <section class="banxin">
+        <div class="addModule">
+            <form>
+                <div class="row g-3 align-items-center">
+                  <div class="col-md-6">
+                    <label for="user" class="form-label">名称</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="isim"
+                      required
+                      style="border: 1px solid var(--primary-color)"
+                    />
+                  </div>
+
+                  <div class="col-md-6">
+                    <label for="user" class="form-label">分类</label>
+                    <select
+                      id="videoTypeId"
+                      style="
+                        width: 100%;
+                        height: 40px;
+                        border: 1px solid var(--primary-color);
+                        color: #999;
+                      "
+                    >
+                      <option value="">请选择分类</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div
+                      id="toolbar-container"
+                      style="border: 1px solid #fda6c4"
+                    ></div>
+                    <div
+                      id="editor-container"
+                      style="border: 1px solid #fda6c4; min-height: 400px"
+                    ></div>
+                  </div>
+                  <script src="https://unpkg.com/@wangeditor/editor@latest/dist/index.js"></script>
+
+                  <div class="col-md-6">
+                    <label for="user" class="form-label">封面</label>
+                    <div class="imgs" style="display: flex; width: 100%"></div>
+                    <div class="uploader">
+                      <input
+                        type="file"
+                        class="form-control"
+                        aria-label="file example"
+                        multiple
+                        required
+                        id="myFileUpload"
+                      />
+                    </div>
+                  </div>
+
+                  
+
+                  <div class="col-md-6">
+                    <label for="user" class="form-label">视频</label>
+                    <div class="videos" style="display: flex; width: 100%"></div>
+                    <div class="uploader">
+                      <input
+                        type="file"
+                        class="form-control"
+                        aria-label="file example"
+                        multiple
+                        required
+                        id="uploadVideo"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  class="btn btn-primary mt-4"
+                  onclick="sendBtn()"
+                >
+                  提交
+                </button>
+              </form>
+        </div>
+    </section>
+
+    <script src="./common/modules/jquery/jquery-3.4.1.min.js"></script>
+    <script src="./layui-v2.5.5/layui.js" charset="utf-8"></script>
+    <script src="./common/modules/jquery/jquery.particleground.min.js"></script>
+    <script src="./common/modules/jquery/jquery.cookie.js"></script>
+    <script src="./common/common.js"></script>
+    <script src="./js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+    <script src="./js/all.js" charset="utf-8"></script>
+    <script src="./js/index.js" charset="utf-8"></script>
+    <script>
+      const navBar = document.querySelector("#menu");
+      window.addEventListener("scroll", function () {
+        console.log(scrollY, "scrollTop");
+        if (scrollY >= 65) {
+          navBar.classList.add("sticky");
+        } else {
+          navBar.classList.remove("sticky");
+        }
+      });
+
+      const { createEditor, createToolbar } = window.wangEditor;
+
+      const editorConfig = { MENU_CONF: {} };
+      editorConfig.placeholder = "请输入内容";
+      editorConfig.onChange = (editor) => {
+        const html = editor.getHtml();
+        console.log("editor content", html);
+      };
+
+      editorConfig.MENU_CONF["uploadImage"] = {
+        server: elyasApi + "file/uploadSingle",
+        // form-data fieldName ，默认值 'wangeditor-uploaded-image'
+        fieldName: "file",
+        // async customUpload(file, inserFn)(){
+        //     insertFn(elyasApi+'file/uploadSingle', res.message, res.data)
+
+        // }
+        customInsert(res, insertFn) {
+          insertFn(res.data, res.message, res.data);
+        },
+      };
+
+      const toolbarConfig = {};
+
+      const editor = createEditor({
+        selector: "#editor-container",
+        html: "",
+        config: editorConfig,
+        mode: "default", // or 'simple'
+      });
+
+      const toolbar = createToolbar({
+        editor,
+        selector: "#toolbar-container",
+        config: toolbarConfig,
+        mode: "default", // or 'simple'
+      });
+
+      // 个人信息
+      elyasAjax("user/detailByToken").then((res) => {
+        $("#avatar").attr(
+          "src",
+          res.data.avatar &&
+            res.data.avatar.split(",")[res.data.avatar.split(",").length - 1]
+        );
+        $("#userName").html(res.data.userName);
+        $("#userEmail").html(res.data.email);
+      });
+
+      // 退出登录
+      function loginOut() {
+        $.removeCookie("token", { domain: "127.0.0.1", path: "/" });
+        commonUtil.message("正在退出。。。");
+        setTimeout(() => {
+          window.parent.location.href = "../../../login.html";
+        }, 500);
+      }
+
+      // 获取商品分类列表
+      elyasAjax("video/type/findByModal").then((res) => {
+        var goodsTypeInfo = res.data.list;
+
+        for (var i = 0; i < goodsTypeInfo.length; i++) {
+          var opt =
+            "<option value='" +
+            goodsTypeInfo[i].id +
+            "'>" +
+            goodsTypeInfo[i].name +
+            "</option>";
+          $("#videoTypeId").append(opt);
+        }
+      });
+
+      // 头像上传
+      var avatar = [];
+      var video = [];
+      // 图片上传
+      $("#myFileUpload").change((event) => {
+        if ($(".imgs img").length >= 1) {
+          alert("最多上传1张");
+          return;
+        }
+
+        for (let index = 0; index < 1; index++) {
+          const file = event.currentTarget.files[index];
+          const formData = new FormData();
+          formData.append("file", file, file.name);
+
+          elyasAjax1("/file/uploadFile", formData).then((res) => {
+            console.log("upload", JSON.parse(res).data.remoteVideoUrl);
+            // 这里显示就需要重新设置一下了
+            // $('#prewImg').attr('src',JSON.parse(res).data)
+
+            $(".imgs").append(
+              '<img src="' +
+                JSON.parse(res).data.remoteVideoUrl +
+                '" alt="" style="width: 100px;height:100px;margin: 10px;object-fit: cover;border-radius: 10px" id="prewImg"> <div class="delete" style="color:#000;background-color:#e5e5e5;font-size:14px;width:30px;height:15px;text-align:center;line-height:15px;cursor: pointer;">X</div>'
+            );
+          });
+          // let isImg = $('.imgs')[index]
+        }
+      });
+
+      // 删除图片
+      $(".card-body").on("click", ".delete", function () {
+        $(this).prev().remove();
+        $(this).remove();
+      });
+
+
+
+     let localVideoUrl = ''
+
+      // 视频
+      $("#uploadVideo").change((event) => {
+        if ($(".videos video").length >= 1) {
+          alert("最多上传1个视频");
+          return;
+        }
+
+        for (let index = 0; index < 1; index++) {
+          const file = event.currentTarget.files[index];
+          const formData = new FormData();
+          formData.append("file", file, file.name);
+          console.log(formData.append("file", file, file.name))
+
+          elyasAjax1("/file/uploadFile", formData).then((res) => {
+            console.log("upload", JSON.parse(res).data);
+            localVideoUrl = JSON.parse(res).data.localVideoUrl
+         
+            // 这里显示就需要重新设置一下了
+            // $('#prewImg').attr('src',JSON.parse(res).data)
+            elyasAjax("/file/getVideoDuration?fileUrl="+JSON.parse(res).data.remoteVideoUrl).then((res) =>{
+
+            })
+            $(".videos").append(
+              '<video src="' +
+                JSON.parse(res).data.remoteVideoUrl +
+                '" alt="" style="width: 100px;height:100px;margin: 10px;object-fit: cover;border-radius: 10px" id="prewImg"> <div class="deleteVid" style="color:#000;background-color:#e5e5e5;font-size:14px;width:30px;height:15px;text-align:center;line-height:15px;cursor: pointer;">X</div>'
+            );
+          });
+          // let isImg = $('.imgs')[index]
+        }
+      });
+
+      $(".card-body").on("click", ".deleteVid", function () {
+        $(this).prev().remove();
+        $(this).remove();
+      });
+
+      // 提交
+      function sendBtn() {
+        const _avatar = [];
+        const _video = [];
+        const imgs = $(".imgs img");
+        const videos = $(".videos video");
+        for (i = 0; i < imgs.length; i++) {
+          _avatar.push(imgs.eq(i).attr("src"));
+        }
+
+        for (i = 0; i < videos.length; i++) {
+            _video.push(videos.eq(i).attr("src"));
+        }
+
+        elyasAjax(
+          "video/add",
+          JSON.stringify({
+            name: $("#isim").val(),
+            videoTypeId: $("#videoTypeId").val(),
+            graphicDetails: editor.getHtml(),
+            imgUrl: _avatar.toString(),
+            videoUrl: _video.toString(),
+            localVideoUrl:localVideoUrl
+          })
+        ).then((res) => {
+          layer.msg('提交成功！',{time:1000})
+           window.location.href = "./addvideo.html";
+        });
+      }
+
+      function  searchHandleClick() {
+        window.location.href = './search.html?name='+encodeURI($('.search_input').val())
+      }
+    </script>
+  </body>
+</html>

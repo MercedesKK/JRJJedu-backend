@@ -1,0 +1,41 @@
+.uploader {
+    width: 70px;
+    height: 70px;
+    border: 1px solid #999;
+    position: relative;
+ 
+    margin: 15px 0;
+    margin-left: 17px;
+}
+.uploader > input {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+.uploader::before {
+    content: '';
+    display: block;
+    width: 80%;
+    height: 2px;
+    background: #999;
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+}
+.uploader::after {
+    content: '';
+    display: block;
+    height: 80%;
+    width: 2px;
+    background: #999;
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    transform: translateX(-50%);
+}

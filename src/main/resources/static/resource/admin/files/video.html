@@ -1,0 +1,342 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>在线视频系统</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
+    <!-- plugin css file  -->
+    <link rel="stylesheet" href="assets/plugin/datatables/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="assets/plugin/datatables/dataTables.bootstrap5.min.css">
+    <!-- project css file  -->
+    <link rel="stylesheet" href="assets/css/ihealth.style.min.css">
+    <style>
+        .detailDss{
+            width: 150px;
+          height: 40px;
+          font-size: 14px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+        }
+    </style>
+</head>
+<body>
+
+<div id="ihealth-layout" class="theme-tradewind">
+    
+    
+
+    <!-- main body area -->
+    <div class="main px-lg-4 px-md-4">
+
+        <!-- Body: Header -->
+        <div class="header">
+            <nav class="navbar py-4">
+                <div class="container-xxl">
+    
+                    <!-- header rightbar icon -->
+                    <div class="h-right d-flex align-items-center mr-5 mr-lg-0 order-1">
+                      
+                        
+                        <div class="dropdown user-profile ml-2 ml-sm-3 d-flex align-items-center zindex-popover" >
+                            <div class="u-info me-2">
+                                <p class="mb-0 text-end line-height-sm "><span class="font-weight-bold" id="userName"></span></p>
+                               
+                            </div>
+                            <a class="nav-link dropdown-toggle pulse p-0" href="#" role="button" data-bs-toggle="dropdown" data-bs-display="static">
+                                <img id="avatar" class="avatar lg rounded-circle img-thumbnail" src="" alt="profile">
+                            </a>
+                            <div class="dropdown-menu rounded-lg shadow border-0 dropdown-animation dropdown-menu-end p-0 m-0">
+                                <div class="card border-0 w280">
+                                    
+                                    <div class="list-group m-2 ">
+                                        
+                                        <a href="#" class="list-group-item list-group-item-action border-0 " onclick="loginOut()"><i class="icofont-logout fs-6 me-3"></i>登出</a>
+                                      
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+    
+                    <!-- menu toggler -->
+                    <button class="navbar-toggler p-0 border-0 menu-toggle order-3" type="button" data-bs-toggle="collapse" data-bs-target="#mainHeader">
+                        <span class="fa fa-bars"></span>
+                    </button>
+                    <div></div>
+                  
+    
+                </div>
+            </nav>
+        </div>  
+
+        <!-- Body: Body -->
+        <div class="body d-flex py-3">
+            <div class="container-xxl">
+                <div class="row align-items-center">
+                    <div class="border-0 mb-4">
+                        <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+                            <h3 class="fw-bold mb-0">视频列表</h3>
+                            <div class="col-auto d-flex w-sm-100">
+                                <button type="button" class="btn btn-primary btn-set-task w-sm-100" data-bs-toggle="modal" data-bs-target="#depadd" onclick="add_page()"><i class="icofont-plus-circle me-2 fs-6"></i>添加</button>
+                            </div>
+                        </div>
+
+                        <!-- 搜索 -->
+                        <div class="col-md-3" style="display: flex;">
+                            <input type="text" class="form-control" id="searcInput"  style="border-bottom: 1px solid var(--primary-color);" placeholder="请输入搜索内容">
+                            <div class="col-md-3" style="margin-left: 20px;">
+                                <button type="button" class="btn btn-primary btn-set-task w-sm-100" data-bs-toggle="modal" data-bs-target="#depadd" onclick="searchBtn()" >搜索</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div> <!-- Row end  -->
+                <div class="row clearfix g-3">
+                  <div class="col-sm-12">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <table id="myProjectTable" class="table table-hover align-middle mb-0" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>封面</th>
+                                            <th>名称</th>
+                                            <th>所属分类</th>
+                                            <th>图文详情</th>
+                                            <th>操作</th>  
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                    </tbody>
+                                </table>
+
+                                 <!-- 分页 -->
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                    <li class="page-item" >
+                                        <a class="page-link prevPage" href="#" aria-label="Previous" onclick="prevPage()">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="page-item" >
+                                        <a class="page-link nextPage" onclick="nextPage()"  href="#" aria-label="Next" >
+                                        <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                  </div>
+                </div><!-- Row End -->
+            </div>
+        </div>      
+      
+        
+
+        <!-- 删除确认模态框开始 -->
+        <div class="modal fade" id="deleteModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+           
+                <!-- 模态框头部 -->
+                <div class="modal-header">
+                  <h4 class="modal-title">删除</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+           
+                <!-- 模态框内容 -->
+                <div class="modal-body">
+                  确定要删除么？
+                </div>
+           
+                <!-- 模态框底部 -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">取消</button>
+                  <button type="button" class="btn btn-primary"  id="deleteBtn">确定</button>
+                </div>
+           
+              </div>
+            </div>
+          </div>
+          <!-- 删除确认模态框结束 -->
+    </div>
+  
+</div>
+
+<!-- Jquery Core Js -->
+<script src="assets/bundles/libscripts.bundle.js"></script>
+
+<!-- Plugin Js -->
+<script src="assets/bundles/apexcharts.bundle.js"></script>
+<script src="assets/plugin/jqueryuicalandar/jquery-ui.min.js"></script>
+<script src="assets/plugin/owlcarousel/owl.carousel.js"></script>
+<script src="assets/bundles/dataTables.bundle.js"></script>      
+
+<!-- Jquery Page Js -->
+<script src="../js/template.js"></script>
+<script src="../js/page/index.js"></script>
+
+<script src="assets/common/modules/jquery/jquery-3.4.1.min.js"></script>
+<script src="assets/common/modules/jquery/jquery.particleground.min.js"></script>
+<script src="assets/common/modules/jquery/jquery.cookie.js"></script>
+<script src="assets/common/common.js"></script>
+
+ <script>
+      
+    // 个人信息
+    elyasAjax('user/detailByToken').then(res =>{
+        $('#avatar').attr('src', res.data.avatar && res.data.avatar.split(',')[res.data.avatar.split(',').length-1])
+        $('#userName').html(res.data.userName)
+        $('#userEmail').html(res.data.email)
+    })
+
+    // 退出登录
+    function loginOut(){
+        $.removeCookie('token',{domain:'127.0.0.1',path:'/'})
+        commonUtil.message('正在退出。。。')
+        setTimeout(() => {
+            window.parent.location.href = '../../../login.html';
+        }, 500);
+    }
+
+    // 获取数据
+    // 定义全局变量
+        let page = 1; // 当前第几页
+        let limit = 10; // 一页显示多少条数据
+        let total = 0; //总共多少条
+        var elyasSize;
+        
+
+
+        function prevPage(){
+            if (page <= 1) {
+                return;
+            }
+            page--;
+            getData();
+        }
+
+
+        function nextPage(){
+            if (page >= elyasSize) {
+                return;
+            }
+            page++;
+            getData();
+        }
+
+        function toPage(pageA){
+            page = pageA
+            getData()
+
+        }
+
+          // 获取数据
+          getData()
+          function searchBtn(){
+              var goodsName = $('#searcInput').val()
+              getData(goodsName)
+          }
+
+          function getData(goodsName){
+
+            var params = goodsName ? JSON.stringify({name:goodsName,page:page,limit:limit}) : JSON.stringify({page:page,limit:limit})
+
+            elyasAjax('video/findByModal',params).then(res =>{
+              let DataItem = ''
+              $('tbody').html('')
+                res.data.list.forEach((item,index) => {
+                    DataItem += `
+                        <tr style="">
+                          <th>
+                            ${index+1}
+                          </th>
+                          <th>
+                            <img style="width:60px;height:60px;" src="${item.imgUrl && item.imgUrl.split(',')[item.imgUrl.split(',').length-1]}" alt="" />
+                          </th>
+                          <th>
+                            ${item.name}
+                          </th>
+                          <th>
+                            ${item.videoTypeName}
+                          </th>
+                          <th class="detailDss">
+                            ${item.graphicDetails == null ? '暂无数据' : item.graphicDetails}
+                          </th>
+                          <th>
+                           
+                            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                <button type="button" class="btn btn-outline-secondary" onclick="editBtn(${item.id})"><i class="icofont-edit text-success" ></i></button>
+                                <button   type="button" class="btn btn-outline-secondary deleterow" data-bs-toggle="modal" data-bs-target="#deleteModal" ><i class="icofont-ui-delete text-danger" onclick="deleteBtn(${item.id})"></i></button>
+                            </div>
+                          
+                          </th>
+                        
+                        </tr>
+                    `
+                });
+                $('tbody').append(DataItem)
+
+                total = res.data.total //获得的页总数赋值给全局变量
+                // 计算获得当前能分成几页
+                
+                elyasSize = Math.ceil(total/limit);
+
+                // 获取上一页、下一页
+                const prev = $('.pagination').children().eq(0)
+                const next = $('.pagination').children().eq(-1)
+
+                $('.pagination').html('')
+                for (var a=0; a<elyasSize; a++) {
+                    // $('.pagination li:last').before(`<li class="page-item" onclick="toPage(${a+1})"><a class="page-link" href="#">${a+1}</a></li>`)
+                    $('.pagination').append(`<li style="margin:0 5px" class="page-item${a+1 == page? ' active' : ''}" onclick="toPage(${a+1})"><a class="page-link" href="#">${a+1}</a></li>`)
+                }
+                $('.pagination').append(next).prepend(prev)
+
+
+            })
+          }
+
+          // 删除
+          $('.modal').on('click', '#deleteBtn', () => {
+              // 发起删除请求
+              elyasAjax('video/delete?id='+userId).then(res =>{
+                  setTimeout(() => {
+                      $('#deleteModal').modal('hide')
+                      window.location.href = './video.html'
+                  }, 200);
+                  
+              })
+          })
+
+          var userId
+          function deleteBtn(id){
+              userId = id
+          }
+
+        // 添加
+        function add_page(){
+            window.location.href = './video-add.html'
+        }
+
+
+        // 编辑
+        function editBtn(id) {
+            window.location.href = './video-edit.html?id='+id
+        }
+
+ </script>
+</body>
+</html> 

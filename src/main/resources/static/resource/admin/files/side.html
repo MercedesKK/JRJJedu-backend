@@ -1,0 +1,152 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>在线视频系统</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
+    <!-- plugin css file  -->
+    <link rel="stylesheet" href="assets/plugin/datatables/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="assets/plugin/datatables/dataTables.bootstrap5.min.css">
+    <!-- project css file  -->
+    <link rel="stylesheet" href="assets/css/ihealth.style.min.css">
+    <style>
+        .sidebar{
+            left:0;
+            width:100%;
+        }
+    
+        a {
+            border-radius:5px;
+            padding: 10px 5px !important;
+        }
+
+        .activecolor {
+            background-color: #fff;
+            color: #000 !important;
+        }
+    </style>
+</head>
+<body>
+
+<div id="ihealth-layout" class="theme-tradewind">
+    
+    <!-- sidebar -->
+    <div class="sidebar px-4 py-4 py-md-5 me-0">
+        <div class="d-flex flex-column h-100">
+            <a href="managerIndex.html" class="mb-0 brand-icon" target="content">
+                <span class="logo-icon">
+                    <i class="icofont-heart-beat fs-2"></i>
+                </span>
+                <span class="logo-text">在线视频系统</span>
+            </a>
+            <!-- Menu: main ul -->
+
+            
+            <ul class="menu-list flex-grow-1 mt-3">
+                <li class="collapsed">
+                <a class="m-link active" data-bs-toggle="collapse" data-bs-target="#dashboard" href="#">
+                <i class="icofont-ui-home fs-5"></i> <span>首页</span> <span class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>
+                <!-- Menu: Sub menu ul -->
+                    <ul class="sub-menu collapse show" id="dashboard">
+                        <li><a class="ms-link activecolor" href="managerIndex.html" target="content">首页</a></li>
+                    </ul>
+                </li>
+                
+                <li class="collapsed">
+                    <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu-Doctor" href="#">
+                        <i class="icofont-doctor-alt fs-5"></i>  <span>用户管理</span> <span class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>
+                        <!-- Menu: Sub menu ul -->
+                        <ul class="sub-menu collapse" id="menu-Doctor">
+                            <li><a class="ms-link" href="user-list.html" target="content">用户列表</a></li>
+                        </ul>
+                </li>
+              
+
+                
+
+                
+                <li class="collapsed">
+                    <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu-Patient" href="#">
+                        <i class="icofont-blind fs-5"></i> <span>视频管理</span> <span class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>
+                    <!-- Menu: Sub menu ul -->
+                    <ul class="sub-menu collapse" id="menu-Patient">
+                        <li><a class="ms-link" href="video.html" target="content">视频列表</a></li>
+                        <li><a class="ms-link" href="video-type.html" target="content">视频分类</a></li>
+                    </ul>
+                </li>
+
+
+                <li><a class="ms-link" href="comment.html" target="content"><i class="icofont-blood-test fs-5"></i> <span>评论管理</span></a></li>
+              
+
+              
+            </ul>
+            
+            <!-- Menu: menu collepce btn -->
+            <button type="button" class="btn btn-link sidebar-mini-btn text-light">
+                <span class="ms-2"><i class="icofont-bubble-right"></i></span>
+            </button>
+        </div>
+    </div>
+
+   
+  
+</div>
+
+<!-- Jquery Core Js -->
+<script src="assets/bundles/libscripts.bundle.js"></script>
+
+<!-- Plugin Js -->
+<script src="assets/bundles/apexcharts.bundle.js"></script>
+<script src="assets/plugin/jqueryuicalandar/jquery-ui.min.js"></script>
+<script src="assets/plugin/owlcarousel/owl.carousel.js"></script>
+<script src="assets/bundles/dataTables.bundle.js"></script>      
+
+<!-- Jquery Page Js -->
+<script src="../js/template.js"></script>
+<script src="../js/page/index.js"></script>
+
+<script src="../js/echarts.min.js"></script>
+<script src="assets/common/modules/jquery/jquery-3.4.1.min.js"></script>
+<script src="assets/common/modules/jquery/jquery.particleground.min.js"></script>
+<script src="assets/common/modules/jquery/jquery.cookie.js"></script>
+<script src="assets/common/common.js"></script>
+ <script>
+      
+    // 个人信息
+    elyasAjax('user/detailByToken').then(res =>{
+        $('#avatar').attr('src', res.data.avatar && res.data.avatar.split(',')[res.data.avatar.split(',').length-1])
+        $('#userName').html(res.data.userName)
+        $('#userEmail').html(res.data.email)
+    })
+
+
+
+
+    
+
+    // 退出登录
+    function loginOut(){
+        $.removeCookie('token',{domain:'127.0.0.1',path:'/'})
+        commonUtil.message('正在退出。。。')
+        setTimeout(() => {
+        window.parent.location.href = '../../../login.html';
+        }, 500);
+    }
+
+    const tabs = document.querySelectorAll('li .ms-link');
+    for(let i = 0; i<tabs.length; i++) {
+        tabs[i].onclick = function() {
+            for(let j = 0; j<tabs.length; j++) {
+                tabs[j].classList.remove('activecolor')
+            }
+            this.classList.add('activecolor')
+        }
+    }
+
+ </script>
+</body>
+</html> 

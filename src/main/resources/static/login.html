@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>在线视频系统</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="./resource/admin/files/vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="./resource/admin/files/vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Custom Font Icons CSS-->
+    <link rel="stylesheet" href="./resource/admin/files/css/font.css">
+    <!-- Google fonts - Muli-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,700">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="./resource/admin/files/css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="./resource/admin/files/css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+<body>
+<div class="login-page">
+    <div class="container d-flex align-items-center">
+        <div class="form-holder has-shadow">
+            <div class="row">
+                <!-- Logo & Information Panel-->
+                <div class="col-lg-6">
+                    <div class="info d-flex align-items-center">
+                        <div class="content">
+                            <div class="logo">
+                                <h1>在线视频系统</h1>
+                            </div>
+                            <p>欢迎您登录</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Form Panel    -->
+                <div class="col-lg-6">
+                    <div class="form d-flex align-items-center">
+                        <div class="content">
+                            <form method="get" class="form-validate mb-4">
+                                <div class="form-group">
+                                    <input id="userName" type="text" name="loginUsername" required data-msg="请输入您的用户名"
+                                           class="input-material" placeholder="用户名" style="padding-left: 1em;">
+
+                                </div>
+                                <div class="form-group">
+                                    <input id="password" type="password" name="loginPassword" required
+                                           data-msg="请输入您的密码" class="input-material" placeholder="密码"
+                                           style="padding-left: 1em;">
+
+                                </div>
+
+                                <button type="button" class="btn btn-primary" onclick="loginBtn()">登录</button>
+                         
+                            </form>
+                            <br><small>没有账号？ </small><a href="register.html" class="signup">注册</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyrights text-center">
+        <p>Design by <a href="https://bootstrapious.com/p/bootstrap-4-dark-admin" class="external">Bootstrapious</a></p>
+        <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+    </div>
+</div>
+<!-- JavaScript files-->
+<script src="./resource/admin/files/vendor/jquery/jquery.min.js"></script>
+<script src="./resource/admin/files/vendor/popper.js/umd/popper.min.js"></script>
+<script src="./resource/admin/files/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="./resource/admin/files/vendor/jquery.cookie/jquery.cookie.js"></script>
+<script src="./resource/admin/files/vendor/chart.js/Chart.min.js"></script>
+<script src="./resource/admin/files/vendor/jquery-validation/jquery.validate.min.js"></script>
+<script src="./resource/admin/js/front.js"></script>
+_
+<script src="./resource/common/modules/jquery/jquery-3.4.1.min.js"></script>
+<script src="./resource/common/modules/jquery/jquery.particleground.min.js"></script>
+<script src="./resource/common/modules/jquery/jquery.cookie.js"></script>
+<script src="./resource/common/common.js"></script>
+
+<script>
+
+    // 登陆
+    function loginBtn() {
+        elyasAjax('user/login', JSON.stringify({
+            userName: $('#userName').val(),
+            password: $('#password').val(),
+        })).then(res => {
+
+            if (res.code !== 200) {
+                commonUtil.message(res.message, 'danger')
+                return;
+            } else {
+                commonUtil.message('登陆成功！')
+                $.cookie('token', res.data.token, {expires: 7})
+                if (res.data.roleId == 0) {
+                    // 跳转到后台管理页面
+                    window.location.href = './resource/admin/files/index.html'
+                } else if (res.data.roleId == 1) {
+                    // 跳转到前台
+                    window.location.href = './resource/user/index.html'
+                }  else {
+                    commonUtil.message('此账号暂无分配权限！', 'danger')
+                }
+
+
+            }
+        })
+    }
+
+</script>
+
+</body>
+</html>

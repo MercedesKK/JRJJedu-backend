@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.MomentLikeMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.MomentLike">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_by" jdbcType="VARCHAR" property="updatedBy" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="subject_id" jdbcType="BIGINT" property="subjectId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+  </resultMap>
+
+    <select id="getCountStateBySubjectId" resultType="java.lang.Integer">
+        select ifnull(count(1),0)
+        from t_moment_like
+        where is_delete = 0
+        and subject_id = #{subjectId}
+        and created_by = #{userId}
+    </select>
+
+    <select id="getCountBySubjectId" resultType="java.lang.Integer">
+        select ifnull(count(1),0)
+        from t_moment_like
+        where is_delete = 0
+        and subject_id = #{subjectId}
+    </select>
+
+  <select id="findUserMomentLikeById" resultType="java.lang.Integer">
+		select count(1)
+		from t_moment_like
+		where is_delete = 0
+		and subject_id = #{subjectId}
+        and created_by = #{createdBy}
+        and status = #{status}
+	</select>
+
+  <update id="cancelMomentLike">
+		update t_moment_like
+		set is_delete = 1
+		where subject_id = #{subjectId}
+        and created_by = #{createdBy}
+        and status = 1
+	</update>
+
+  <select id="selectByIdAndIsDelete" resultMap="BaseResultMap">
+        select *
+        from t_moment_like
+        where is_delete = 0
+        and subject_id = #{subjectId}
+        and created_by = #{createdBy}
+        and status = 1
+    </select>
+
+</mapper>

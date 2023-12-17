@@ -1,0 +1,274 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>在线视频系统</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
+    <!-- plugin css file  -->
+    <link rel="stylesheet" href="assets/plugin/datatables/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="assets/plugin/datatables/dataTables.bootstrap5.min.css">
+    <!-- project css file  -->
+    <link rel="stylesheet" href="assets/css/ihealth.style.min.css">
+    <link href="css/avatar.css" rel="stylesheet">
+</head>
+<body>
+
+<div id="ihealth-layout" class="theme-tradewind">
+    
+    
+
+    <!-- main body area -->
+    <div class="main px-lg-4 px-md-4">
+
+        <!-- Body: Header -->
+        <div class="header">
+            <nav class="navbar py-4">
+                <div class="container-xxl">
+    
+                    <!-- header rightbar icon -->
+                    <div class="h-right d-flex align-items-center mr-5 mr-lg-0 order-1">
+                      
+                        
+                        <div class="dropdown user-profile ml-2 ml-sm-3 d-flex align-items-center zindex-popover" >
+                            <div class="u-info me-2">
+                                <p class="mb-0 text-end line-height-sm "><span class="font-weight-bold" id="userName"></span></p>
+                               
+                            </div>
+                            <a class="nav-link dropdown-toggle pulse p-0" href="#" role="button" data-bs-toggle="dropdown" data-bs-display="static">
+                                <img id="avatar" class="avatar lg rounded-circle img-thumbnail" src="" alt="profile">
+                            </a>
+                            <div class="dropdown-menu rounded-lg shadow border-0 dropdown-animation dropdown-menu-end p-0 m-0">
+                                <div class="card border-0 w280">
+                                    
+                                    <div class="list-group m-2 ">
+                                        
+                                        <a href="#" class="list-group-item list-group-item-action border-0 " onclick="loginOut()"><i class="icofont-logout fs-6 me-3"></i>登出</a>
+                                      
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+    
+                    <!-- menu toggler -->
+                    <button class="navbar-toggler p-0 border-0 menu-toggle order-3" type="button" data-bs-toggle="collapse" data-bs-target="#mainHeader">
+                        <span class="fa fa-bars"></span>
+                    </button>
+                    <div></div>
+                  
+    
+                </div>
+            </nav>
+        </div>  
+
+        <!-- Body: Body -->
+        <div class="body d-flex py-3">
+            
+            <div class="card mb-3">
+                <div class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
+                    <h6 class="mb-0 fw-bold ">编辑用户</h6>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="row g-3 align-items-center">
+                            <div class="col-md-6" style="display: none;">
+                                <label for="user" class="form-label">用户名</label>
+                                <input type="text" class="form-control" id="zz" required style="border: 1px solid var(--primary-color);">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="user" class="form-label">用户名</label>
+                                <input type="text" class="form-control" id="isim" required style="border: 1px solid var(--primary-color);">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="user" class="form-label">密码</label>
+                                <input type="password" class="form-control" id="password" required style="border: 1px solid var(--primary-color);">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="user" class="form-label">手机号</label>
+                                <input type="text" class="form-control" id="phone" required style="border: 1px solid var(--primary-color);">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="user" class="form-label">邮箱</label>
+                                <input type="text" class="form-control" id="email" required style="border: 1px solid var(--primary-color);">
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="user" class="form-label">权限</label>
+                                <select  id="roleId" style="width: 100%;height: 40px;border: 1px solid var(--primary-color);color: #333;">
+                                    <option value="">请选择权限</option>
+                                    <option value="0">管理员</option>
+                                    <option value="1">写手</option>
+                                   
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="user" class="form-label">性别</label>
+                                <select  id="sex" style="width: 100%;height: 40px;border: 1px solid var(--primary-color);color: #333;">
+                                    <option value="">请选择性别</option>
+                                    <option value="0">女性</option>
+                                    <option value="1">男性</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="user" class="form-label">头像</label>
+                                <div class="imgs" style="display: flex;width: 100%"></div>
+                                <div class="uploader">
+                                    <input type="file" class="form-control" aria-label="file example" multiple required id="myFileUpload">
+                                </div>
+                            </div>
+                            
+                            
+                            
+                        </div>
+                        
+                        <button type="button" class="btn btn-primary mt-4" onclick="sendBtn()">提交</button>
+                    </form>
+                </div>  
+            </div>
+
+        </div>      
+      
+        
+
+       
+    </div>
+  
+</div>
+
+<!-- Jquery Core Js -->
+<script src="assets/bundles/libscripts.bundle.js"></script>
+
+<!-- Plugin Js -->
+<script src="assets/bundles/apexcharts.bundle.js"></script>
+<script src="assets/plugin/jqueryuicalandar/jquery-ui.min.js"></script>
+<script src="assets/plugin/owlcarousel/owl.carousel.js"></script>
+<script src="assets/bundles/dataTables.bundle.js"></script>      
+
+<!-- Jquery Page Js -->
+<script src="../js/template.js"></script>
+<script src="../js/page/index.js"></script>
+
+<script src="assets/common/modules/jquery/jquery-3.4.1.min.js"></script>
+<script src="assets/common/modules/jquery/jquery.particleground.min.js"></script>
+<script src="assets/common/modules/jquery/jquery.cookie.js"></script>
+<script src="assets/common/common.js"></script>
+ <script>
+    // 监听ID
+    var id = location.search.replace(/[^\d]/g, "")
+    console.log(id,'article id @@')
+    var avatar = []
+    
+      
+    // 个人信息
+    elyasAjax('user/detailByToken').then(res =>{
+        $('#avatar').attr('src', res.data.avatar && res.data.avatar.split(',')[res.data.avatar.split(',').length-1])
+        $('#userName').html(res.data.userName)
+        $('#userEmail').html(res.data.email)
+    })
+
+    // 退出登录
+    function loginOut(){
+        $.removeCookie('token',{domain:'127.0.0.1',path:'/'})
+        commonUtil.message('正在退出。。。')
+        setTimeout(() => {
+            window.parent.location.href = '../../../login.html';
+        }, 500);
+    }
+
+     // 数据回显
+     elyasAjax('user/detail?id='+id).then(res =>{
+        console.log(res,'user detail')
+        
+        $('#isim').val(res.data.userName)
+        $('#password').val(res.data.password)
+        $('#email').val(res.data.email)
+        $('#phone').val(res.data.phone)
+        $('#roleId').val(res.data.roleId)
+        $('#sex').val(res.data.sex)
+        avatar.push(res.data.avatar)
+        $('.imgs').append('<img src="'+res.data.avatar.split(',')[res.data.avatar.split(',').length-1]+'" alt="" style="width: 100px;height:100px;margin: 10px;object-fit: cover;border-radius: 10px" id="prewImg"> <div class="delete" style="color:#000;background-color:#e5e5e5;font-size:14px;width:30px;height:15px;text-align:center;line-height:15px;cursor: pointer;">X</div>')
+        $("#roleId").select2({
+        placeholder: "请选择权限",
+        });
+        $("#sex").select2({
+            placeholder: "请选择性别",
+        });
+        
+    })
+
+            // 头像上传
+         
+                 // 图片上传
+                $('#myFileUpload').change((event) => {
+
+            if ($('.imgs img').length >= 100) {
+                alert('最多上传100张')
+                return
+            }
+
+            for (let index = 0; index < 1; index++) {
+
+                const file = event.currentTarget.files[index]
+                const formData = new FormData()
+                formData.append('file', file, file.name)
+
+                elyasAjax1('/file/uploadFile', formData).then(res => {
+                    console.log('upload', JSON.parse(res).data);
+                    // 这里显示就需要重新设置一下了
+                    // $('#prewImg').attr('src',JSON.parse(res).data)
+
+                    $('.imgs').append('<img src="'+JSON.parse(res).data.remoteVideoUrl+'" alt="" style="width: 100px;height:100px;margin: 10px;object-fit: cover;border-radius: 10px" id="prewImg"> <div class="delete" style="color:#000;background-color:#e5e5e5;font-size:14px;width:30px;height:15px;text-align:center;line-height:15px;cursor: pointer;">X</div>')
+                    
+                })
+                // let isImg = $('.imgs')[index]
+            }
+
+
+            })
+
+            // 删除图片
+            $('.card-body').on('click', '.delete', function() {
+                $(this).prev().remove()
+                $(this).remove()
+            })
+
+            // 提交
+            function sendBtn(){
+                const _avatar = []
+                const imgs = $('.imgs img')
+                for (i = 0; i < imgs.length; i++) {
+                    _avatar.push(imgs.eq(i).attr('src'))
+                }
+
+            
+                elyasAjax('user/update',JSON.stringify({
+                    userName:$('#isim').val(),
+                    password:$('#password').val(),
+                    email:$('#email').val(),
+                    phone:$('#phone').val(),
+                    roleId:$('#roleId').val(),
+                    sex:$('#sex').val(),
+                    avatar:_avatar.toString(),
+                    id:id
+                })).then(res =>{
+                    console.log(res,'提交信息')
+                    window.location.href = './user-list.html'
+                })
+            }
+
+   
+
+ </script>
+</body>
+</html> 

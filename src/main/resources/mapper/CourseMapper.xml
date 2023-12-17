@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.CourseMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.Course">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="updated_by" jdbcType="VARCHAR" property="updatedBy" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="status" jdbcType="BIGINT" property="status" />
+    <result column="course_type_id" jdbcType="BIGINT" property="courseTypeId" />
+    <result column="name" jdbcType="LONGVARCHAR" property="name" />
+    <result column="graphic_details" jdbcType="LONGVARCHAR" property="graphicDetails" />
+    <result column="img_url" jdbcType="LONGVARCHAR" property="imgUrl" />
+    <result column="video_url" jdbcType="LONGVARCHAR" property="videoUrl" />
+    <result column="views" jdbcType="INTEGER" property="views" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+  </resultMap>
+
+    <select id="list" resultType="com.company.project.model.Course">
+        select s.id as id,s.created_at as createdAt,s.created_by as createdBy,
+                s.updated_by as updatedBy,s.updated_at as updatedAt,s.status as status,
+                s.course_type_id as courseTypeId,s.name as name,s.graphic_details as graphicDetails,
+                s.img_url as imgUrl,s.video_url as videoUrl,s.views as views,s.price as price,
+                ct.name as courseTypeName,
+                u.user_name as userName
+        from t_course s
+        left join t_course_type ct on s.course_type_id = ct.id
+        left join t_user u on s.created_by = u.id
+        where s.is_delete = 0
+        <if test="courseTypeId != null and courseTypeId != ''">
+            and s.course_type_id = #{courseTypeId}
+        </if>
+        <if test="name != null and name != ''">
+            and s.name like CONCAT('%',#{name},'%')
+        </if>
+    </select>
+
+    <select id="detail" resultType="com.company.project.model.Course">
+        select s.id as id,s.created_at as createdAt,s.created_by as createdBy,
+                s.updated_by as updatedBy,s.updated_at as updatedAt,s.status as status,
+                s.course_type_id as courseTypeId,s.name as name,s.graphic_details as graphicDetails,
+                s.img_url as imgUrl,s.video_url as videoUrl,s.price as price,
+                ct.name as courseTypeName,
+                u.user_name as userName,u.user_desc as userDesc,u.avatar as avatar
+        from t_course s
+        left join t_course_type ct on s.course_type_id = ct.id
+        left join t_user u on s.created_by = u.id
+        where s.is_delete = 0
+        and s.id = #{id}
+    </select>
+
+    <select id="selectByCourseTypeId" resultMap="BaseResultMap">
+        select *
+        from t_course
+        where is_delete = 0
+        and course_type_id = #{courseTypeId}
+    </select>
+
+</mapper>

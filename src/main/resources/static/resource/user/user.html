@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>首页</title>
+    <link
+      rel="stylesheet"
+      href="./utils/fontawesome-free-5.15.4-web/css/all.min.css"
+    />
+
+   
+
+    <link rel="stylesheet" href="./css/custom.css" />
+    <link rel="stylesheet" href="./css/detailheader.css" />
+    <link rel="stylesheet" href="./css/user.css" />
+  </head>
+  <body>
+    <header class="header">
+      <nav id="navBar">
+        <div class="menu" id="menu">
+          <div class="left">
+            <ul class="left_ul">
+              <li class="left_li">
+                <a href="./index.html">
+                  <i class="fas fa-house-damage"></i>
+                  首页
+                </a>
+              </li>
+              <li class="left_li"><a href="javascript:;">番剧</a></li>
+              <li class="left_li"><a href="javascript:;">直播</a></li>
+              <li class="left_li"><a href="javascript:;">游戏中心</a></li>
+              <li class="left_li"><a href="javascript:;">会员购</a></li>
+              <li class="left_li"><a href="javascript:;">漫画</a></li>
+              <li class="left_li"><a href="javascript:;">赛事</a></li>
+              <li class="left_li">
+                <a href="javascript:;">
+                  <i class="fas fa-chess-rook"></i>
+                  下载客户端
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="search">
+            <input type="text" class="search_input" placeholder="魔兽世界"  />
+            <i class="fab fa-sistrix" onclick="searchHandleClick()"></i>
+          </div>
+
+          <div class="right">
+            <ul class="right_ul" style="margin-top: 0;">
+              <li class="right_li avatar_box">
+                <a href="./user.html" style="width:32px;height:32px" id="userAvatar">
+                 <img src="./images/avatar.png" class="avatar" />
+                </a>
+               </li>
+              <li class="right_li">
+                <i class="fab fa-sketch"></i>
+                <p>大会员</p>
+              </li>
+              <a href="./chatlist.html">
+                <li class="right_li">
+                  <i class="fab fa-pushed"></i>
+                  <p>消息</p>
+                </li>
+              </a>
+              <li class="right_li">
+                <i class="fab fa-react"></i>
+                <p>动态</p>
+              </li>
+              <li class="right_li">
+                <i class="fas fa-chess-rook"></i>
+                <p>收藏</p>
+              </li>
+              <li class="right_li">
+                <i class="fab fa-cloudversify"></i>
+                <p>历史</p>
+              </li>
+              <li class="right_li">
+                <i class="far fa-window-maximize"></i>
+                <p>创作中心</p>
+              </li>
+              <a href="./addvideo.html">
+                <button>
+                  <i class="fas fa-pen-square"></i>
+                  投稿
+                </button>
+              </a>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <section class="">
+      <div class="user">
+        <div class="banner">
+          <div class="info">
+            <img src="./images/avatar.png" alt="" />
+
+            <div class="left-info">
+              <div class="naame">33不是珊珊</div>
+              <div class="email">etles_code@126.com</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <ul class="tabs">
+            <li class="tab active" style="display: flex;align-items:center;">
+              <i class="fas fa-house-damage" style="margin-right:5px;color:#00C091"></i>
+              <p>主页</p>
+            </li>
+            <li class="tab" style="display: flex;align-items:center;">
+              <i class="fas fa-chart-area" style="margin-right:5px;color:#02B5DA"></i>
+              <p>投稿</p>
+            </li>
+            <li class="tab" style="display: flex;align-items:center;">
+              <i class="fas fa-splotch" style="margin-right:5px;color:#02daab"></i>
+              <p>收藏</p>
+            </li>
+            <li class="tab" style="display: flex;align-items:center;">
+              <i class="fab fa-yarn" style="margin-right:5px;color:#FF5D47"></i>
+              <p>资料</p>
+            </li>
+          </ul>
+
+          <div class="content">
+            <section class="active">
+             
+                <div class="title" id="myvi">我的视频 10</div>
+                <div class="my-video-list" id="myallvideo">
+                    
+                </div>
+
+
+
+                <div class="title" style="margin-top: 40px;" id="myvs">收藏 5</div>
+                <div class="my-video-list" id="mySaveAll">
+                  
+                </div>
+
+            </section>
+
+            <section>
+
+                <div class="my-all-video">
+                    <div class="left-tab" style="margin-right: 60px;">
+                        <ul class="left-tabs" id="samleft">
+                            
+                           
+                          </ul>
+                    </div>
+                    <div class="right-content">
+                        <div class="title" style="margin: 0;margin-bottom:15px">我的视频</div>
+                        <div class="my-video-list" id="pageVideoMy">
+                           
+                          
+                        
+                        </div>
+                    </div>
+                </div>
+            
+            </section>
+
+            <section>
+                <div class="title" id="pgsavenum">我的收藏 2</div>
+                <div class="my-video-list" id="pageSave">
+                    
+                
+                </div>
+            </section>
+
+            <section>
+              <div class="my-all-video">
+                <div class="left-tab" style="margin-right: 60px;">
+                    <ul class="left-tabx">
+                        <li class="tabx active">
+                            <span>个人信息</span>
+                        </li>
+                       
+                      
+                      </ul>
+                </div>
+                <div class="right-content" id="omba">
+
+                    <div class="box active">
+
+                      <div class="form_item">
+                        <label for="">账  户</label>
+                        <input type="text" id="userName">
+                      </div>
+
+                      <div class="form_item">
+                        <label for="">密  码</label>
+                        <input type="text" id="password">
+                      </div>
+
+                      <div class="form_item">
+                        <label for="">邮  箱</label>
+                        <input type="text" id="email">
+                      </div>
+
+                      <div class="form_item">
+                        <label for="">手  机</label>
+                        <input type="text" id="phone">
+                      </div>
+
+                      <div class="form_item">
+                        <label for="user" class="form-label">头像</label>
+                        <div class="imgs" style="display: flex;width: 100%"></div>
+                        <div class="uploader">
+                            <input type="file" class="form-control" aria-label="file example" multiple required id="myFileUpload">
+                        </div>
+                    </div>
+
+                      <button class="gengxxin" onclick="reset()" type="button">更新</button>
+                      <button class="gengxxin" onclick="outLogin()" type="button">退出</button>
+                    </div>
+
+                    <div class="box">
+                      two
+                    </div>
+                    
+                </div>
+            </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="./common/modules/jquery/jquery-3.4.1.min.js"></script>
+    <script src="./layui-v2.5.5/layui.js" charset="utf-8"></script>
+    <script src="./common/modules/jquery/jquery.particleground.min.js"></script>
+    <script src="./common/modules/jquery/jquery.cookie.js"></script>
+    <script src="./common/common.js"></script>
+    <script src="./js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+     <script src="./js/all.js" charset="utf-8"></script>
+    <script src="./js/user.js" charset="utf-8"></script>
+    <script>
+      const navBar = document.querySelector("#menu");
+      window.addEventListener("scroll", function () {
+        console.log(scrollY, "scrollTop");
+        if (scrollY >= 65) {
+          navBar.classList.add("sticky");
+        } else {
+          navBar.classList.remove("sticky");
+        }
+      });
+
+      const tabs = document.querySelectorAll(".tab");
+      const contentItem = document.querySelectorAll(".content section");
+
+      for (let i = 0; i < tabs.length; i++) {
+        tabs[i].onclick = function () {
+          for (let j = 0; j < tabs.length; j++) {
+            tabs[j].classList.remove("active");
+            contentItem[j].classList.remove("active");
+          }
+
+          this.classList.add("active");
+          contentItem[i].classList.add("active");
+        };
+      }
+
+
+
+
+
+
+      const tabx = document.querySelectorAll(".tabx");
+      const contentItemx = document.querySelectorAll("#omba .box");
+
+      for (let i = 0; i < tabx.length; i++) {
+        tabx[i].onclick = function () {
+          for (let j = 0; j < tabx.length; j++) {
+            tabx[j].classList.remove("active");
+            contentItemx[j].classList.remove("active");
+          }
+
+          this.classList.add("active");
+          contentItemx[i].classList.add("active");
+        };
+      }
+
+
+      function  searchHandleClick() {
+        window.location.href = './search.html?name='+encodeURI($('.search_input').val())
+      }
+
+      function outLogin(){
+        $.removeCookie('token',{domain:'127.0.0.1',path:'/'})
+
+        setTimeout(() => {
+          window.parent.location.href = '../../login.html';
+        }, 500);
+      }
+
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.Order">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="updated_by" jdbcType="VARCHAR" property="updatedBy" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="province_id" jdbcType="BIGINT" property="provinceId" />
+    <result column="province_name" jdbcType="VARCHAR" property="provinceName" />
+    <result column="city_id" jdbcType="BIGINT" property="cityId" />
+    <result column="city_name" jdbcType="VARCHAR" property="cityName" />
+    <result column="region_id" jdbcType="BIGINT" property="regionId" />
+    <result column="region_name" jdbcType="VARCHAR" property="regionName" />
+    <result column="linkman" jdbcType="VARCHAR" property="linkman" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="earnest_money" jdbcType="DECIMAL" property="earnestMoney" />
+    <result column="delivery_time" jdbcType="TIMESTAMP" property="deliveryTime" />
+    <result column="receiving_time" jdbcType="TIMESTAMP" property="receivingTime" />
+    <result column="total_money" jdbcType="TIMESTAMP" property="totalMoney" />
+    <result column="merchant_tracking_number" jdbcType="TIMESTAMP" property="merchantTrackingNumber" />
+    <result column="member_tracking_number" jdbcType="TIMESTAMP" property="memberTrackingNumber" />
+    <result column="row_piece_id" jdbcType="BIGINT" property="rowPieceId" />
+      <result column="discount_coupon_price" jdbcType="DECIMAL" property="discountCouponPrice" />
+  </resultMap>
+
+    <select id="getTodayCount" resultType="java.math.BigDecimal">
+        select ifnull(sum(total_money),0)
+        from t_order
+        where is_delete = 0
+        and date_format(created_at,'%Y-%d-%m') = date_format(#{date},'%Y-%d-%m')
+    </select>
+
+    <select id="getTodayOrderCount" resultType="java.math.BigDecimal">
+        select count(1)
+        from t_order
+        where is_delete = 0
+        and date_format(created_at,'%Y-%d-%m') = date_format(#{date},'%Y-%d-%m')
+    </select>
+
+    <select id="getMarketCount" resultType="java.math.BigDecimal">
+        select sum(total_money)
+        from t_order
+        where is_delete = 0
+    </select>
+
+    <select id="getNumber" resultType="java.lang.Integer">
+        select count(1)
+        from t_order
+        where is_delete = 0
+        and created_by = #{userId}
+    </select>
+
+    <select id="getTotalMoney" resultType="java.math.BigDecimal">
+        select ifnull(sum(total_money),0)
+        from t_order
+        where is_delete = 0
+        and row_piece_id in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
+    </select>
+
+    <select id="getMarketOrderCount" resultType="java.math.BigDecimal">
+        select count(1)
+        from t_order
+        where is_delete = 0
+    </select>
+
+  <select id="detail" resultMap="BaseResultMap">
+        select *
+        from t_order
+        where is_delete = 0
+        and id = #{id}
+    </select>
+
+  <select id="list" resultMap="BaseResultMap">
+        select *
+        from t_order
+        where is_delete = 0
+        <if test="createdBy != null and createdBy != ''">
+            and created_by = #{createdBy}
+        </if>
+        order by created_at desc
+    </select>
+
+</mapper>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.MomentCommentMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.MomentComment">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_by" jdbcType="VARCHAR" property="updatedBy" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="moment_id" jdbcType="BIGINT" property="momentId" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="image_urls" jdbcType="LONGVARCHAR" property="imageUrls" />
+  </resultMap>
+
+    <select id="getCountByMomentId" resultType="java.lang.Integer">
+        select ifnull(count(1),0)
+        from t_moment_comment
+        where is_delete = 0
+        and moment_id = #{momentId}
+    </select>
+
+    <select id="list" resultType="com.company.project.model.MomentComment">
+        select mc.id as id,mc.created_by as createdBy,mc.created_at as createdAt,mc.moment_id as momentId,mc.parent_id as parentId,
+               mc.comment as comment,mc.state as state,mc.image_urls as imageUrls,
+                u.user_name as userName, u.avatar as avatar
+        from t_moment_comment mc
+        left join t_user u on mc.created_by = u.id
+        where mc.is_delete = 0
+        <if test="createdBy != null and createdBy != ''">
+            and mc.created_by = #{createdBy}
+        </if>
+    </select>
+
+  <select id="detail" resultType="com.company.project.model.MomentComment">
+        select mc.id as id,mc.created_by as createdBy,mc.created_at as createdAt,mc.moment_id as momentId,mc.parent_id as parentId,
+                mc.comment as comment,mc.state as state,mc.image_urls as imageUrls,
+                ifnull((select count(1) from t_moment_like m where m.is_delete = 0 and status = 1 and m.subject_id = mc.id),0) as likeNum
+        from t_moment_comment mc
+        where mc.is_delete = 0
+        and mc.moment_id = #{momentId}
+    </select>
+
+    <select id="selectChildrenByParentId" resultType="com.company.project.model.MomentComment">
+        select mc.id as id,mc.created_by as createdBy,mc.created_at as createdAt,mc.moment_id as momentId,mc.parent_id as parentId,
+                mc.comment as comment,mc.state as state,mc.image_urls as imageUrls,
+                ifnull((select count(1) from t_moment_like m where m.is_delete = 0 and status = 1 and m.subject_id = mc.id),0) as likeNum,
+                u.user_name as userName,u.avatar as avatar
+        from t_moment_comment mc
+        left join t_user u on mc.created_by = u.id
+        where mc.is_delete = 0
+        and mc.parent_id = #{parentId}
+    </select>
+
+    <select id="selectParentByMomentId" resultType="com.company.project.model.MomentComment">
+        select mc.id as id,mc.created_by as createdBy,mc.created_at as createdAt,mc.moment_id as momentId,mc.parent_id as parentId,
+                mc.comment as comment,mc.state as state,mc.image_urls as imageUrls,
+                ifnull((select count(1) from t_moment_like m where m.is_delete = 0 and status = 1 and m.subject_id = mc.id),0) as likeNum,
+                u.user_name as userName,u.avatar as avatar
+        from t_moment_comment mc
+        left join t_user u on mc.created_by = u.id
+        where mc.is_delete = 0
+        and mc.moment_id = #{momentId}
+        and mc.parent_id is null
+    </select>
+
+  <select id="selectByMomentId" resultType="com.company.project.model.MomentComment">
+        select mc.id as id,mc.created_by as createdBy,mc.created_at as createdAt,mc.moment_id as momentId,mc.parent_id as parentId,
+                mc.comment as comment,mc.state as state,mc.image_urls as imageUrls,
+                ifnull((select count(1) from t_moment_like m where m.is_delete = 0 and status = 1 and m.subject_id = mc.id),0) as likeNum,
+                u.user_name as userName,u.avatar as avatar
+        from t_moment_comment mc
+        left join t_user u on mc.created_by = u.id
+        where mc.is_delete = 0
+        and mc.moment_id = #{momentId}
+    </select>
+
+</mapper>

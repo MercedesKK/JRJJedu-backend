@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>首页</title>
+    <link
+            rel="stylesheet"
+            href="./utils/fontawesome-free-5.15.4-web/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./css/custom.css">
+    <link rel="stylesheet" href="./css/searchHeader.css">
+    <link rel="stylesheet" href="./css/typeMain.css">
+</head>
+<body>
+<header class="header">
+    <nav id="navBar">
+        <div class="menu" id="menu">
+            <div class="left">
+                <ul class="left_ul">
+                    <li class="left_li">
+                        <a href="./index.html">
+                            <i class="fas fa-house-damage"></i>
+                            首页
+                        </a>
+                    </li>
+                    <li class="left_li"><a href="javascript:;">番剧</a></li>
+                    <li class="left_li"><a href="javascript:;">直播</a></li>
+                    <li class="left_li"><a href="javascript:;">游戏中心</a></li>
+                    <li class="left_li"><a href="javascript:;">会员购</a></li>
+                    <li class="left_li"><a href="javascript:;">漫画</a></li>
+                    <li class="left_li"><a href="javascript:;">赛事</a></li>
+                    <li class="left_li">
+                        <a href="javascript:;">
+                            <i class="fas fa-chess-rook"></i>
+                            下载客户端
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="search">
+                <input type="text" class="search_input" placeholder="魔兽世界"  />
+                <i class="fab fa-sistrix" onclick="searchHandleClick()"></i>
+            </div>
+
+            <div class="right">
+                <ul class="right_ul">
+                    <li class="right_li avatar_box">
+                        <a href="./user.html" style="width: 32px;height:32px" id="userAvatar">
+                            <img src="./images/avatar.png" class="avatar" />
+                        </a>
+                    </li>
+                    <li class="right_li">
+                        <i class="fab fa-sketch"></i>
+                        <p>大会员</p>
+                    </li>
+                    <a href="./chatlist.html">
+                        <li class="right_li">
+                            <i class="fab fa-pushed"></i>
+                            <p>消息</p>
+                        </li>
+                    </a>
+                    <li class="right_li">
+                        <i class="fab fa-react"></i>
+                        <p>动态</p>
+                    </li>
+                    <li class="right_li">
+                        <i class="fas fa-chess-rook"></i>
+                        <p>收藏</p>
+                    </li>
+                    <li class="right_li">
+                        <i class="fab fa-cloudversify"></i>
+                        <p>历史</p>
+                    </li>
+                    <li class="right_li">
+                        <i class="far fa-window-maximize"></i>
+                        <p>创作中心</p>
+                    </li>
+                    <a href="./addvideo.html">
+                        <button>
+                            <i class="fas fa-pen-square"></i>
+                            投稿
+                        </button>
+                    </a>
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+
+</header>
+
+
+<section class="banxin">
+
+    <div class="middle">
+        <ul class="middle_types">
+        </ul>
+    </div>
+
+
+
+    <div class="main_video_all_list" style="margin-left: 20px">
+        <ul class="all_video">
+
+
+        </ul>
+    </div>
+
+</section>
+
+
+<script src="./common/modules/jquery/jquery-3.4.1.min.js"></script>
+<script src="./layui-v2.5.5/layui.js" charset="utf-8"></script>
+<script src="./common/modules/jquery/jquery.particleground.min.js"></script>
+<script src="./common/modules/jquery/jquery.cookie.js"></script>
+<script src="./common/common.js"></script>
+<script src="./js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+<script src="./js/all.js" charset="utf-8"></script>
+<script src="./js/type.js" charset="utf-8"></script>
+<script>
+    const navBar = document.querySelector('#menu');
+    window.addEventListener('scroll', function(){
+        console.log(scrollY,'scrollTop')
+        if (scrollY >= 65) {
+            navBar.classList.add('sticky')
+        }else {
+            navBar.classList.remove('sticky')
+        }
+    })
+    function  searchHandleClick() {
+        window.location.href = './search.html?name='+encodeURI($('.search_input').val())
+    }
+
+
+</script>
+</body>
+</html>
