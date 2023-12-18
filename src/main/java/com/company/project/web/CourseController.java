@@ -62,6 +62,7 @@ public class CourseController extends BaseController {
     @ApiOperation(value = "分页查询", notes = "分页查询")
     @RequestMapping(value = "/findByModal", method = {RequestMethod.POST})
     public Result list(@RequestBody(required =false) Course course) {
+        System.out.println(course);
         return courseService.list(course);
     }
 }
