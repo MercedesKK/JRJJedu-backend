@@ -37,7 +37,7 @@
                 s.moment_id as momentId,
                 u.user_name as userName,
                 u.avatar as avatar,
-                tc.img_url as imgUrl,tc.name as courseName,
+                tc.img_url as imgUrl,tc.name as courseName
         from t_collect s
         left join t_user u on u.id = s.created_by
         left join t_course tc on s.moment_id = tc.id
