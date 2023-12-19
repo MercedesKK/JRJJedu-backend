@@ -81,7 +81,7 @@ public class OrderServiceImpl extends AbstractService<Order> implements OrderSer
 
         order.setCreatedAt(new Date());
         order.setIsDelete(false);
-        order.setStatus(2);
+//        order.setStatus(0);
         save(order);
 
         //调用支付宝直接生成购买效果图，具体图片在upload下 2.jpg

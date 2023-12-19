@@ -23,6 +23,7 @@ public class OrderController extends BaseController {
     @ApiOperation(value = "下单", notes = "下单")
     @RequestMapping(value = "/add", method = {RequestMethod.POST})
     public Result add(@RequestBody Order order) {
+        System.out.println(order.getStatus());
         order.setCreatedBy(super.getUserId());
         return orderService.add(order);
     }
